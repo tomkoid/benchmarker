@@ -7,6 +7,7 @@ pub struct Category {
     pub name: String,
     pub slug: String,
     pub description: Option<String>,
+    pub specification_schema: Option<serde_json::Value>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, FromRow)]
@@ -43,4 +44,31 @@ pub struct CategoriesResponse {
 #[derive(Debug, Serialize)]
 pub struct ProductResponse {
     pub product: Product,
+}
+
+#[derive(Debug, Serialize)]
+pub struct ComparisonResponse {
+    pub category: Category,
+    pub products: Vec<Product>,
+    pub comparison_table: Vec<ComparisonRow>,
+}
+
+#[derive(Debug, Serialize)]
+pub struct ComparisonRow {
+    pub field: String,
+    pub label: String,
+    pub unit: String,
+    pub values: Vec<ComparisonValue>,
+}
+
+#[derive(Debug, Serialize)]
+pub struct ComparisonValue {
+    pub product_id: i32,
+    pub product_name: String,
+    pub value: serde_json::Value,
+}
+
+#[derive(Debug, Deserialize)]
+pub struct CompareQuery {
+    pub ids: String, // comma-separated product IDs
 }

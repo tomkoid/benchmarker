@@ -1,4 +1,4 @@
-use crate::PgPoolOptions;
+use sqlx::postgres::PgPoolOptions;
 use sqlx::Row;
 
 pub async fn ensure_database_exists(database_url: &str) -> color_eyre::Result<()> {
