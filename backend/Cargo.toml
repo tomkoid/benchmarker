@@ -5,9 +5,12 @@ edition = "2024"
 
 [dependencies]
 axum = "0.8.8"
-eyre = { version = "0.6.5", package = "color-eyre" }
+bigdecimal = { version = "0.4", features = ["serde"] }
+dotenvy = "0.15.7"
+color-eyre = "0.6.5"
 serde = { version = "1.0.228", features = ["derive"] }
 serde_json = "1.0.149"
-sqlx = { version = "0.8.6", features = ["postgres", "runtime-tokio"] }
+sqlx = { version = "0.8.6", features = ["postgres", "runtime-tokio", "macros", "migrate", "bigdecimal"] }
 tokio = { version = "1.49.0", features = ["full"] }
+tracing = "0.1"
 tracing-subscriber = "0.3.22"

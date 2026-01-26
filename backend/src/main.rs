@@ -1,52 +1,47 @@
-use axum::{Json, Router, http::StatusCode, routing::get};
-use sqlx::postgres::PgPoolOptions;
+mod models;
+mod routes;
 
-fn api_routes() -> Router {
-    Router::new().route("/products", get(products))
-}
+use axum::Router;
+use sqlx::postgres::PgPoolOptions;
+use std::env;
+
+use crate::db::ensure_database_exists;
+
+pub mod db;
 
 #[tokio::main]
-pub async fn main() -> eyre::Result<()> {
-    // initialize tracing
+pub async fn main() -> color_eyre::Result<()> {
+    dotenvy::dotenv().ok();
+    color_eyre::install()?;
     tracing_subscriber::fmt::init();
 
+    let database_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set in .env file");
+    let host = env::var("HOST").unwrap_or_else(|_| "0.0.0.0".to_string());
+    let port = env::var("PORT").unwrap_or_else(|_| "3000".to_string());
+
+    // Ensure database exists before connecting
+    ensure_database_exists(&database_url).await?;
+
+    tracing::info!("Connecting to database...");
     let pool = PgPoolOptions::new()
         .max_connections(5)
-        .connect("postgres://postgres:xxx@localhost/skoda")
+        .connect(&database_url)
         .await?;
 
-    let row: (i64,) = sqlx::query_as("SELECT $1")
-        .bind(150_i64)
-        .fetch_one(&pool)
-        .await?;
+    tracing::info!("Running migrations...");
+    sqlx::migrate!("./migrations").run(&pool).await?;
 
-    // build our application with a route
+    let state = routes::AppState { db: pool };
+
     let app = Router::new()
-        // `GET /` goes to `root`
-        .nest("/api/v1", api_routes());
-    // `POST /users` goes to `create_user`
-    // .route("/users", post(create_user));
+        .nest("/api/v1", routes::api_routes())
+        .with_state(state);
 
-    // run our app with hyper, listening globally on port 3000
-    let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await.unwrap();
+    let bind_addr = format!("{}:{}", host, port);
+    tracing::info!("Server listening on {}", bind_addr);
+
+    let listener = tokio::net::TcpListener::bind(&bind_addr).await?;
     axum::serve(listener, app).await?;
 
     Ok(())
-}
-
-async fn products() -> (StatusCode, Json<ProductsResponse>) {
-    let products = ProductsResponse {
-        products: vec![
-            "Product 1".to_string(),
-            "Product 2".to_string(),
-            "Product 3".to_string(),
-        ],
-    };
-
-    (StatusCode::OK, Json(products))
-}
-
-#[derive(serde::Serialize, serde::Deserialize)]
-struct ProductsResponse {
-    products: Vec<String>,
 }
