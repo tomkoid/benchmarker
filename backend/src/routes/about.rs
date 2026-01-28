@@ -12,6 +12,6 @@ pub async fn get_about() -> Json<AboutResponse> {
     Json(AboutResponse {
         name: env!("CARGO_PKG_NAME").to_string(),
         version: env!("CARGO_PKG_VERSION").to_string(),
-        description: "Product Comparison API - Compare products across different categories with detailed specifications".to_string(),
+        description: env!("CARGO_PKG_DESCRIPTION").to_string(),
     })
 }

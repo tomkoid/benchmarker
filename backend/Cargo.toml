@@ -1,5 +1,6 @@
 [package]
-name = "backend"
+name = "utilbench-backend"
+description = "API for the UtilBench service - compare products in different categories"
 version = "0.1.0"
 edition = "2024"
 
