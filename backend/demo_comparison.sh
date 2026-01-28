@@ -82,4 +82,86 @@ echo ""
 curl -s "$BASE_URL/products/compare?ids=$CPU1,$CPU2,$CPU3" | jq '.'
 
 echo ""
+echo "=================================================="
+echo ""
+
+echo "4. Get Microwave category schema:"
+curl -s "$BASE_URL/categories/microwaves" | jq '.specification_schema'
+echo ""
+
+echo "5. Adding three microwaves..."
+echo ""
+
+# Add Panasonic NN-SN96JS
+MW1=$(curl -s -X POST "$BASE_URL/products" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "category_id": 4,
+    "name": "Panasonic NN-SN96JS",
+    "manufacturer": "Panasonic",
+    "model": "NN-SN96JS",
+    "price": 329.95,
+    "specifications": {
+      "wattage": "1250",
+      "capacity": "2.2",
+      "turntable_diameter": "16.5",
+      "sensor_cooking": true,
+      "convection": false,
+      "dimensions": "14.0 x 23.9 x 19.4"
+    }
+  }' | jq -r '.product.id')
+echo "Added Panasonic NN-SN96JS (ID: $MW1)"
+
+# Add Toshiba EM131A5C-BS
+MW2=$(curl -s -X POST "$BASE_URL/products" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "category_id": 4,
+    "name": "Toshiba EM131A5C-BS",
+    "manufacturer": "Toshiba",
+    "model": "EM131A5C-BS",
+    "price": 159.99,
+    "specifications": {
+      "wattage": "1100",
+      "capacity": "1.2",
+      "turntable_diameter": "12.4",
+      "sensor_cooking": true,
+      "convection": false,
+      "dimensions": "12.8 x 20.5 x 17.1"
+    }
+  }' | jq -r '.product.id')
+echo "Added Toshiba EM131A5C-BS (ID: $MW2)"
+
+# Add Breville BMO870BSS
+MW3=$(curl -s -X POST "$BASE_URL/products" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "category_id": 4,
+    "name": "Breville Combi Wave 3-in-1",
+    "manufacturer": "Breville",
+    "model": "BMO870BSS",
+    "price": 499.95,
+    "specifications": {
+      "wattage": "1200",
+      "capacity": "1.1",
+      "turntable_diameter": "13.0",
+      "sensor_cooking": false,
+      "convection": true,
+      "dimensions": "11.6 x 18.5 x 18.1"
+    }
+  }' | jq -r '.product.id')
+echo "Added Breville Combi Wave 3-in-1 (ID: $MW3)"
+
+echo ""
+echo "6. Comparing all three microwaves:"
+echo ""
+curl -s "$BASE_URL/products/compare?ids=$MW1,$MW2,$MW3" | jq '.'
+
+echo ""
+echo "7. Search demo - Find microwaves under $200:"
+echo ""
+curl -s "$BASE_URL/products/search?category=microwaves&max_price=200" | jq '.products[] | {name, manufacturer, price}'
+
+echo ""
 echo "=== Demo Complete ==="
+
