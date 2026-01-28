@@ -43,11 +43,7 @@ pub async fn main() -> color_eyre::Result<()> {
 
     let cors_layer = tower_http::cors::CorsLayer::new()
         .allow_methods(Any)
-        .allow_origin(
-            "https://utilbench-api.tomkoid.cz"
-                .parse::<HeaderValue>()
-                .unwrap(),
-        )
+        .allow_origin(Any)
         .allow_headers([AUTHORIZATION, CONTENT_TYPE]);
 
     let app = Router::new()
