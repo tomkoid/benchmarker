@@ -46,7 +46,8 @@ This ensures all products in a category share the same structure, making compari
 - Automatic migration on startup
 
 ### 4. **New API Endpoints**
-- `GET /api/v1/categories/:slug` - Get category with schema
+- `GET /api/v1/categories/{slug}` - Get category with schema
+- `GET /api/v1/products/search` - Search and filter products
 - `GET /api/v1/products/compare?ids=x,y,z` - Compare products
 
 ## How It Works

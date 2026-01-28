@@ -20,6 +20,7 @@ pub fn api_routes() -> Router<AppState> {
         .route("/categories/{slug}", get(get_category))
         .route("/categories/{slug}/products", get(list_products_by_category))
         .route("/products", get(list_all_products).post(create_product))
+        .route("/products/search", get(search_products))
         .route("/products/compare", get(compare_products))
         .route("/products/{id}", get(get_product))
 }
@@ -153,6 +154,74 @@ async fn create_product(
     })?;
 
     Ok((StatusCode::CREATED, Json(ProductResponse { product })))
+}
+
+async fn search_products(
+    State(state): State<AppState>,
+    Query(query): Query<SearchQuery>,
+) -> Result<Json<ProductsResponse>, StatusCode> {
+    // Build base query
+    let mut sql = String::from(
+        r#"
+        SELECT DISTINCT p.id, p.category_id, p.name, p.manufacturer, p.model, p.specifications, p.price
+        FROM products p
+        LEFT JOIN categories c ON p.category_id = c.id
+        WHERE 1=1
+        "#,
+    );
+
+    let search_pattern = query.q.as_ref().map(|q| format!("%{}%", q));
+    let manufacturer_pattern = query.manufacturer.as_ref().map(|m| format!("%{}%", m));
+    let min_price_decimal = query.min_price.map(|p| BigDecimal::from(p as i64) / BigDecimal::from(100));
+    let max_price_decimal = query.max_price.map(|p| BigDecimal::from(p as i64) / BigDecimal::from(100));
+
+    // Add search conditions
+    if query.q.is_some() {
+        sql.push_str(" AND (p.name ILIKE $1 OR p.manufacturer ILIKE $1 OR p.model ILIKE $1)");
+    }
+    if query.category.is_some() {
+        sql.push_str(" AND c.slug = $2");
+    }
+    if query.manufacturer.is_some() {
+        sql.push_str(" AND p.manufacturer ILIKE $3");
+    }
+    if query.min_price.is_some() {
+        sql.push_str(" AND p.price >= $4");
+    }
+    if query.max_price.is_some() {
+        sql.push_str(" AND p.price <= $5");
+    }
+
+    sql.push_str(" ORDER BY p.name");
+
+    // Build and bind query
+    let mut db_query = sqlx::query_as::<_, Product>(&sql);
+
+    if let Some(ref pattern) = search_pattern {
+        db_query = db_query.bind(pattern);
+    }
+    if let Some(ref category) = query.category {
+        db_query = db_query.bind(category);
+    }
+    if let Some(ref pattern) = manufacturer_pattern {
+        db_query = db_query.bind(pattern);
+    }
+    if let Some(ref min_price) = min_price_decimal {
+        db_query = db_query.bind(min_price);
+    }
+    if let Some(ref max_price) = max_price_decimal {
+        db_query = db_query.bind(max_price);
+    }
+
+    let products = db_query
+        .fetch_all(&state.db)
+        .await
+        .map_err(|e| {
+            tracing::error!("Failed to search products: {}", e);
+            StatusCode::INTERNAL_SERVER_ERROR
+        })?;
+
+    Ok(Json(ProductsResponse { products }))
 }
 
 async fn compare_products(
