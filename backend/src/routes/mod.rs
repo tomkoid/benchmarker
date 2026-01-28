@@ -6,11 +6,13 @@ pub struct AppState {
     pub db: PgPool,
 }
 
+pub mod about;
 pub mod categories;
 pub mod products;
 
 pub fn api_routes() -> Router<AppState> {
     Router::new()
+        .route("/about", get(about::get_about))
         .route("/categories", get(categories::list_categories))
         .route("/categories/{slug}", get(categories::get_category))
         .route(
