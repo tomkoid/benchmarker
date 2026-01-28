@@ -14,6 +14,7 @@ pub struct Category {
 pub struct Product {
     pub id: i32,
     pub category_id: i32,
+    pub category_name: String,
     pub name: String,
     pub manufacturer: Option<String>,
     pub model: Option<String>,

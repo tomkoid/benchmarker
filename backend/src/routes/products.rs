@@ -22,9 +22,10 @@ pub async fn list_all_products(
 ) -> Result<Json<ProductsResponse>, StatusCode> {
     let mut products = sqlx::query_as::<_, Product>(
         r#"
-        SELECT id, category_id, name, manufacturer, model, specifications, price
-        FROM products
-        ORDER BY name
+        SELECT p.id, p.category_id, c.name as category_name, p.name, p.manufacturer, p.model, p.specifications, p.price
+        FROM products p
+        JOIN categories c ON p.category_id = c.id
+        ORDER BY p.name
         "#,
     )
     .fetch_all(&state.db)
@@ -45,9 +46,10 @@ pub async fn get_product(
 ) -> Result<Json<ProductResponse>, StatusCode> {
     let product = sqlx::query_as::<_, Product>(
         r#"
-        SELECT id, category_id, name, manufacturer, model, specifications, price
-        FROM products
-        WHERE id = $1
+        SELECT p.id, p.category_id, c.name as category_name, p.name, p.manufacturer, p.model, p.specifications, p.price
+        FROM products p
+        JOIN categories c ON p.category_id = c.id
+        WHERE p.id = $1
         "#,
     )
     .bind(id)
@@ -68,9 +70,10 @@ pub async fn create_product(
     // Check if product with the same name already exists
     let existing = sqlx::query_as::<_, Product>(
         r#"
-        SELECT id, category_id, name, manufacturer, model, specifications, price
-        FROM products
-        WHERE LOWER(name) = LOWER($1)
+        SELECT p.id, p.category_id, c.name as category_name, p.name, p.manufacturer, p.model, p.specifications, p.price
+        FROM products p
+        JOIN categories c ON p.category_id = c.id
+        WHERE LOWER(p.name) = LOWER($1)
         "#,
     )
     .bind(&payload.name)
@@ -94,7 +97,9 @@ pub async fn create_product(
         r#"
         INSERT INTO products (category_id, name, manufacturer, model, specifications, price)
         VALUES ($1, $2, $3, $4, $5, $6)
-        RETURNING id, category_id, name, manufacturer, model, specifications, price
+        RETURNING id, category_id, 
+            (SELECT name FROM categories WHERE id = $1) as category_name,
+            name, manufacturer, model, specifications, price
         "#,
     )
     .bind(payload.category_id)
@@ -120,7 +125,7 @@ pub async fn search_products(
     // Build base query
     let mut sql = String::from(
         r#"
-        SELECT DISTINCT p.id, p.category_id, p.name, p.manufacturer, p.model, p.specifications, p.price
+        SELECT DISTINCT p.id, p.category_id, c.name as category_name, p.name, p.manufacturer, p.model, p.specifications, p.price
         FROM products p
         LEFT JOIN categories c ON p.category_id = c.id
         WHERE 1=1
@@ -213,10 +218,11 @@ pub async fn compare_products(
     // Fetch products
     let products = sqlx::query_as::<_, Product>(
         r#"
-        SELECT id, category_id, name, manufacturer, model, specifications, price
-        FROM products
-        WHERE id = ANY($1)
-        ORDER BY id
+        SELECT p.id, p.category_id, c.name as category_name, p.name, p.manufacturer, p.model, p.specifications, p.price
+        FROM products p
+        JOIN categories c ON p.category_id = c.id
+        WHERE p.id = ANY($1)
+        ORDER BY p.id
         "#,
     )
     .bind(&product_ids)

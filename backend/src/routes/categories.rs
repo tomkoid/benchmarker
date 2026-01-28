@@ -47,7 +47,7 @@ pub async fn list_products_by_category(
 ) -> Result<Json<ProductsResponse>, StatusCode> {
     let products = sqlx::query_as::<_, Product>(
         r#"
-        SELECT p.id, p.category_id, p.name, p.manufacturer, p.model, p.specifications, p.price
+        SELECT p.id, p.category_id, c.name as category_name, p.name, p.manufacturer, p.model, p.specifications, p.price
         FROM products p
         JOIN categories c ON p.category_id = c.id
         WHERE c.slug = $1
