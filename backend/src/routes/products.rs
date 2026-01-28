@@ -20,7 +20,7 @@ use bigdecimal::BigDecimal;
 pub async fn list_all_products(
     State(state): State<AppState>,
 ) -> Result<Json<ProductsResponse>, StatusCode> {
-    let products = sqlx::query_as::<_, Product>(
+    let mut products = sqlx::query_as::<_, Product>(
         r#"
         SELECT id, category_id, name, manufacturer, model, specifications, price
         FROM products
@@ -33,6 +33,8 @@ pub async fn list_all_products(
         tracing::error!("Failed to fetch all products: {}", e);
         StatusCode::INTERNAL_SERVER_ERROR
     })?;
+
+    products.sort_by(|a, b| a.id.cmp(&b.id));
 
     Ok(Json(ProductsResponse { products }))
 }
@@ -183,10 +185,12 @@ pub async fn search_products(
         db_query = db_query.bind(max_price);
     }
 
-    let products = db_query.fetch_all(&state.db).await.map_err(|e| {
+    let mut products = db_query.fetch_all(&state.db).await.map_err(|e| {
         tracing::error!("Failed to search products: {}", e);
         StatusCode::INTERNAL_SERVER_ERROR
     })?;
+
+    products.sort_by(|a, b| a.id.cmp(&b.id));
 
     Ok(Json(ProductsResponse { products }))
 }
