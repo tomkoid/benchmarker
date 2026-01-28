@@ -49,46 +49,46 @@ pub fn build_comparison_table(category: &Category, products: &[Product]) -> Vec<
     });
 
     // Add specification rows based on schema
-    if let Some(schema) = &category.specification_schema {
-        if let Some(schema_obj) = schema.as_object() {
-            for (field_name, field_def) in schema_obj {
-                if let Some(field_obj) = field_def.as_object() {
-                    let label = field_obj
-                        .get("label")
-                        .and_then(|v| v.as_str())
-                        .unwrap_or(field_name)
-                        .to_string();
-                    let unit = field_obj
-                        .get("unit")
-                        .and_then(|v| v.as_str())
-                        .unwrap_or("")
-                        .to_string();
+    if let Some(schema) = &category.specification_schema
+        && let Some(schema_obj) = schema.as_object()
+    {
+        for (field_name, field_def) in schema_obj {
+            if let Some(field_obj) = field_def.as_object() {
+                let label = field_obj
+                    .get("label")
+                    .and_then(|v| v.as_str())
+                    .unwrap_or(field_name)
+                    .to_string();
+                let unit = field_obj
+                    .get("unit")
+                    .and_then(|v| v.as_str())
+                    .unwrap_or("")
+                    .to_string();
 
-                    let values = products
-                        .iter()
-                        .map(|p| {
-                            let value = p
-                                .specifications
-                                .as_ref()
-                                .and_then(|specs| specs.get(field_name))
-                                .cloned()
-                                .unwrap_or(json!(null));
+                let values = products
+                    .iter()
+                    .map(|p| {
+                        let value = p
+                            .specifications
+                            .as_ref()
+                            .and_then(|specs| specs.get(field_name))
+                            .cloned()
+                            .unwrap_or(json!(null));
 
-                            ComparisonValue {
-                                product_id: p.id,
-                                product_name: p.name.clone(),
-                                value,
-                            }
-                        })
-                        .collect();
+                        ComparisonValue {
+                            product_id: p.id,
+                            product_name: p.name.clone(),
+                            value,
+                        }
+                    })
+                    .collect();
 
-                    rows.push(ComparisonRow {
-                        field: field_name.clone(),
-                        label,
-                        unit,
-                        values,
-                    });
-                }
+                rows.push(ComparisonRow {
+                    field: field_name.clone(),
+                    label,
+                    unit,
+                    values,
+                });
             }
         }
     }

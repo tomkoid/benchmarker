@@ -1,10 +1,4 @@
-use crate::models::*;
-use axum::{
-    Json, Router,
-    extract::{Path, Query, State},
-    http::StatusCode,
-    routing::get,
-};
+use axum::{Router, routing::get};
 use sqlx::PgPool;
 
 #[derive(Clone)]
