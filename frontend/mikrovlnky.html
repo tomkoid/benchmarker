@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="cs">
+<meta author="Jakub Klášterka, Václav Pašek, Tomáš Zierl, Tadeáš Pokora, Štěpán Žítek">
+<head>
+    <meta charset="UTF-8">
+    <title>UtilBench - Mikrovlnky</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+<header>
+    <div class="logo-container">
+        <img src="logo.jpg" alt="UTIL-BENCH Logo" class="logo-img">
+        <div class="logo">UTIL-BENCH</div>
+    </div>
+    <nav>
+        <a href="index.html">Domů</a>
+        <a href="kategorie.html">Kategorie</a>
+        <a href="o-projektu.html">O projektu</a>
+    </nav>
+</header>
+
+<main>
+<div class="global-search-bar">
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Vyhledat produkty...">
+        <div id="searchResults"></div>
+    </div>
+</div>
+<section class="hero">
+    <h1>Mikrovlnky</h1>
+    <p>Porovnání výkonu, ceny a spolehlivosti mikrovlnek</p>
+</section>
+
+<section class="benchmark">
+    <h2>Benchmark – Mikrovlnky</h2>
+
+    <div class="products-container">
+        <div class="card" onclick="toggleCard(this)">
+            <div class="card-header">
+                <h3>Samsung MW3500</h3>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <p class="card-description">Max. výkon, rychlý ohřev, vynikající spolehlivost</p>
+            <div class="card-content">
+                <div class="card-specs">
+                    <table>
+                        <tr>
+                            <th>Max. teplota</th>
+                            <td>100 °C</td>
+                        </tr>
+                        <tr>
+                            <th>Doba ohřevu</th>
+                            <td>2:30 min</td>
+                        </tr>
+                        <tr>
+                            <th>Ohřev</th>
+                            <td>Ze středu</td>
+                        </tr>
+                        <tr>
+                            <th>Spolehlivost</th>
+                            <td>8.5 / 10</td>
+                        </tr>
+                        <tr>
+                            <th>Cena</th>
+                            <td>2 990 Kč</td>
+                        </tr>
+                    </table>
+                    <a class="buy" href="#">Nejlevnější ověřený obchod</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<footer>
+    <p>© 2026 UTIL-BENCH</p>
+</footer>
+</main>
+</div>
+
+<script>
+function toggleCard(element) {
+    element.classList.toggle('expanded');
+}
+
+const products = [
+    { name: 'Samsung MW3500', link: 'mikrovlnky.html', category: 'Mikrovlnky' },
+    { name: 'LG F4WV3496AD', link: 'pracky.html', category: 'Pračky' }
+];
+
+document.getElementById('searchInput').addEventListener('input', function() {
+    const query = this.value.toLowerCase();
+    const resultsDiv = document.getElementById('searchResults');
+    if (query === '') {
+        resultsDiv.innerHTML = '';
+        return;
+    }
+    const filtered = products.filter(p => p.name.toLowerCase().includes(query));
+    resultsDiv.innerHTML = filtered.map(p => `<div><a href="${p.link}">${p.name} - ${p.category}</a></div>`).join('');
+});
+</script>
+
+</body>
+</html>

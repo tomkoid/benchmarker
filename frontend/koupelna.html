@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="cs">
+<meta author="Jakub Klášterka, Václav Pašek, Tomáš Zierl, Tadeáš Pokora, Štěpán Žítek">
+<head>
+    <meta charset="UTF-8">
+    <title>UtilBench - Koupelna</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+<header>
+    <div class="logo-container">
+        <img src="logo.jpg" alt="UTIL-BENCH Logo" class="logo-img">
+        <div class="logo">UTIL-BENCH</div>
+    </div>
+    <nav>
+        <a href="index.html">Domů</a>
+        <a href="kategorie.html">Kategorie</a>
+        <a href="o-projektu.html">O projektu</a>
+    </nav>
+</header>
+
+<main>
+<div class="global-search-bar">
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Vyhledat produkty...">
+        <div id="searchResults"></div>
+    </div>
+</div>
+<section class="hero">
+    <h1>🛁 Koupelna</h1>
+    <p>Porovnání spotřebičů do koupelny</p>
+</section>
+
+<section class="products">
+    <h2>Kategorie produktů</h2>
+    <div class="product-grid">
+        <a href="pracky.html" class="product-card">
+            <h3>Pračky</h3>
+            <p>srovnání praček a sušiček</p>
+            <button>Porovnat →</button>
+        </a>
+        <div class="product-card">
+            <h3>Ohřívače vody</h3>
+            <p>srovnání boilerů</p>
+            <button>Porovnat →</button>
+        </div>
+        <div class="product-card">
+            <h3>Ventilátory</h3>
+            <p>srovnání větrací zařízení</p>
+            <button>Porovnat →</button>
+        </div>
+        <div class="product-card">
+            <h3>Sušičky prádla</h3>
+            <p>srovnání kondenzačních a tepelných sušiček</p>
+            <button>Porovnat →</button>
+        </div>
+        <div class="product-card">
+            <h3>Sprchové hlavice</h3>
+            <p>srovnání úsporných a masážních hlavic</p>
+            <button>Porovnat →</button>
+        </div>
+        <div class="product-card">
+            <h3>Toaletní prkénka</h3>
+            <p>srovnání elektronických sedátek</p>
+            <button>Porovnat →</button>
+        </div>
+        <div class="product-card">
+            <h3>Odsavače par</h3>
+            <p>srovnání nástěnných a skříňových odsavačů</p>
+            <button>Porovnat →</button>
+        </div>
+        <div class="product-card">
+            <h3>Zrcadla s osvětlením</h3>
+            <p>srovnání LED osvětlených zrcadel</p>
+            <button>Porovnat →</button>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>© 2026 UTIL-BENCH</p>
+</footer>
+</main>
+</div>
+
+<script>
+const products = [
+    { name: 'Samsung MW3500', link: 'mikrovlnky.html', category: 'Mikrovlnky' },
+    { name: 'LG F4WV3496AD', link: 'pracky.html', category: 'Pračky' }
+];
+
+document.getElementById('searchInput').addEventListener('input', function() {
+    const query = this.value.toLowerCase();
+    const resultsDiv = document.getElementById('searchResults');
+    if (query === '') {
+        resultsDiv.innerHTML = '';
+        return;
+    }
+    const filtered = products.filter(p => p.name.toLowerCase().includes(query));
+    resultsDiv.innerHTML = filtered.map(p => `<div><a href="${p.link}">${p.name} - ${p.category}</a></div>`).join('');
+});
+</script>
+
+</body>
+</html>

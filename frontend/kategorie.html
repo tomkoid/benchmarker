@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="cs">
+<meta author="Jakub Klášterka, Václav Pašek, Tomáš Zierl">
+<head>
+    <meta charset="UTF-8">
+    <title>UtilBench - Kategorie</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+<header>
+    <div class="logo-container">
+        <img src="logo.jpg" alt="UTIL-BENCH Logo" class="logo-img">
+        <div class="logo">UTIL-BENCH</div>
+    </div>
+    <nav>
+        <a href="index.html">Domů</a>
+        <a href="kategorie.html">Kategorie</a>
+        <a href="o-projektu.html">O projektu</a>
+    </nav>
+</header>
+
+<main>
+<div class="global-search-bar">
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Vyhledat produkty...">
+        <div id="searchResults"></div>
+    </div>
+</div>
+<section class="hero">
+    <h1>Kategorie</h1>
+    <p>Vyberte kategorii a porovnávejte spotřebiče</p>
+</section>
+
+<section class="categories">
+    <div class="category-grid">
+        <div class="category-item">
+            <div class="category" onclick="toggleCategory(this)">
+                <img src="images/kitchen-category.png" alt="Kuchyň" class="category-image"> Kuchyně           
+                <span class="toggle">▼</span>
+            </div>
+            <div class="subcategories">
+                <a href="kuchyn.html" class="subcategory">Všechny produkty</a>
+                <a href="mikrovlnky.html" class="subcategory">Mikrovlnky</a>
+                <a href="#" class="subcategory">Trouby</a>
+                <a href="#" class="subcategory">Lednice</a>
+                <a href="#" class="subcategory">Varné desky</a>
+                <a href="#" class="subcategory">Myčky nádobí</a>
+                <a href="#" class="subcategory">Kávovary</a>
+                <a href="#" class="subcategory">Fritézy</a>
+                <a href="#" class="subcategory">Mixéry</a>
+            </div>
+        </div>
+        <div class="category-item">
+            <div class="category" onclick="toggleCategory(this)">
+                <img src="images/bathroom-category.png" alt="Koupelna" class="category-image"> Koupelna
+                <span class="toggle">▼</span>
+            </div>
+            <div class="subcategories">
+                <a href="koupelna.html" class="subcategory">Všechny produkty</a>
+                <a href="pracky.html" class="subcategory">Pračky</a>
+                <a href="#" class="subcategory">Ohřívače vody</a>
+                <a href="#" class="subcategory">Ventilátory</a>
+                <a href="#" class="subcategory">Sušičky prádla</a>
+                <a href="#" class="subcategory">Sprchové hlavice</a>
+                <a href="#" class="subcategory">Toaletní prkénka</a>
+                <a href="#" class="subcategory">Odsavače par</a>
+                <a href="#" class="subcategory">Zrcadla s osvětlením</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>© 2026 UTIL-BENCH</p>
+</footer>
+</main>
+</div>
+
+<script>
+function toggleCategory(element) {
+    const subcategories = element.nextElementSibling;
+    const toggle = element.querySelector('.toggle');
+    
+    subcategories.classList.toggle('open');
+    toggle.textContent = subcategories.classList.contains('open') ? '▲' : '▼';
+}
+</script>
+
+<script>
+const products = [
+    { name: 'Samsung MW3500', link: 'mikrovlnky.html', category: 'Mikrovlnky' },
+    { name: 'LG F4WV3496AD', link: 'pracky.html', category: 'Pračky' }
+];
+
+document.getElementById('searchInput').addEventListener('input', function() {
+    const query = this.value.toLowerCase();
+    const resultsDiv = document.getElementById('searchResults');
+    if (query === '') {
+        resultsDiv.innerHTML = '';
+        return;
+    }
+    const filtered = products.filter(p => p.name.toLowerCase().includes(query));
+    resultsDiv.innerHTML = filtered.map(p => `<div><a href="${p.link}">${p.name} - ${p.category}</a></div>`).join('');
+});
+</script>
+
+</body>
+</html>
