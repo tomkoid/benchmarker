@@ -75,9 +75,9 @@ pub struct CompareQuery {
 
 #[derive(Debug, Deserialize)]
 pub struct SearchQuery {
-    pub q: Option<String>,           // General search query
+    pub q: Option<String>,            // General search query
     pub category: Option<String>,     // Filter by category slug
     pub manufacturer: Option<String>, // Filter by manufacturer
-    pub min_price: Option<f64>,      // Minimum price
-    pub max_price: Option<f64>,      // Maximum price
+    pub min_price: Option<f64>,       // Minimum price
+    pub max_price: Option<f64>,       // Maximum price
 }

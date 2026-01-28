@@ -7,6 +7,7 @@ use std::env;
 
 use crate::db::ensure_database_exists;
 
+pub mod compare;
 pub mod db;
 
 #[tokio::main]
