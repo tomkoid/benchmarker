@@ -63,6 +63,27 @@ pub async fn create_product(
     State(state): State<AppState>,
     Json(payload): Json<CreateProduct>,
 ) -> Result<(StatusCode, Json<ProductResponse>), StatusCode> {
+    // Check if product with the same name already exists
+    let existing = sqlx::query_as::<_, Product>(
+        r#"
+        SELECT id, category_id, name, manufacturer, model, specifications, price
+        FROM products
+        WHERE LOWER(name) = LOWER($1)
+        "#,
+    )
+    .bind(&payload.name)
+    .fetch_optional(&state.db)
+    .await
+    .map_err(|e| {
+        tracing::error!("Failed to check for existing product: {}", e);
+        StatusCode::INTERNAL_SERVER_ERROR
+    })?;
+
+    if existing.is_some() {
+        tracing::warn!("Product with name '{}' already exists", payload.name);
+        return Err(StatusCode::CONFLICT);
+    }
+
     let price = payload
         .price
         .map(|p| BigDecimal::from(p as i64) / BigDecimal::from(100));
