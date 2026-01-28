@@ -113,26 +113,37 @@ pub async fn search_products(
         .max_price
         .map(|p| BigDecimal::from(p as i64) / BigDecimal::from(100));
 
-    // Add search conditions
-    if query.q.is_some() {
-        sql.push_str(" AND (p.name ILIKE $1 OR p.manufacturer ILIKE $1 OR p.model ILIKE $1)");
+    // Track parameter count
+    let mut param_count = 0;
+
+    // Add search conditions dynamically with correct parameter numbers
+    if search_pattern.is_some() {
+        param_count += 1;
+        sql.push_str(&format!(
+            " AND (p.name ILIKE ${} OR p.manufacturer ILIKE ${} OR p.model ILIKE ${})",
+            param_count, param_count, param_count
+        ));
     }
     if query.category.is_some() {
-        sql.push_str(" AND c.slug = $2");
+        param_count += 1;
+        sql.push_str(&format!(" AND c.slug = ${}", param_count));
     }
-    if query.manufacturer.is_some() {
-        sql.push_str(" AND p.manufacturer ILIKE $3");
+    if manufacturer_pattern.is_some() {
+        param_count += 1;
+        sql.push_str(&format!(" AND p.manufacturer ILIKE ${}", param_count));
     }
-    if query.min_price.is_some() {
-        sql.push_str(" AND p.price >= $4");
+    if min_price_decimal.is_some() {
+        param_count += 1;
+        sql.push_str(&format!(" AND p.price >= ${}", param_count));
     }
-    if query.max_price.is_some() {
-        sql.push_str(" AND p.price <= $5");
+    if max_price_decimal.is_some() {
+        param_count += 1;
+        sql.push_str(&format!(" AND p.price <= ${}", param_count));
     }
 
     sql.push_str(" ORDER BY p.name");
 
-    // Build and bind query
+    // Build and bind query in the correct order
     let mut db_query = sqlx::query_as::<_, Product>(&sql);
 
     if let Some(ref pattern) = search_pattern {
