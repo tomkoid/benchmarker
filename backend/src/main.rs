@@ -16,6 +16,7 @@ use crate::db::ensure_database_exists;
 
 pub mod compare;
 pub mod db;
+pub mod schemas;
 
 #[tokio::main]
 pub async fn main() -> color_eyre::Result<()> {
@@ -38,6 +39,9 @@ pub async fn main() -> color_eyre::Result<()> {
 
     tracing::info!("Running migrations...");
     sqlx::migrate!("./migrations").run(&pool).await?;
+
+    tracing::info!("Syncing category schemas from schemas.yml...");
+    schemas::sync_categories(&pool).await?;
 
     let state = routes::AppState { db: pool };
 

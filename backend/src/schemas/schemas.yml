@@ -1,0 +1,145 @@
+categories:
+  - slug: cpus
+    name: CPUs
+    description: Central Processing Units
+    specifications:
+      cores:
+        type: number
+        label: Cores
+        unit: ""
+        higher_is_better: true
+      threads:
+        type: number
+        label: Threads
+        unit: ""
+        higher_is_better: true
+      base_clock:
+        type: string
+        label: Base Clock
+        unit: GHz
+        higher_is_better: true
+      boost_clock:
+        type: string
+        label: Boost Clock
+        unit: GHz
+        higher_is_better: true
+      tdp:
+        type: string
+        label: TDP
+        unit: W
+        higher_is_better: false
+      socket:
+        type: string
+        label: Socket
+        unit: ""
+        higher_is_better: null
+      cache:
+        type: string
+        label: Cache
+        unit: MB
+        higher_is_better: true
+
+  - slug: gpus
+    name: GPUs
+    description: Graphics Processing Units
+    specifications:
+      vram:
+        type: string
+        label: VRAM
+        unit: GB
+        higher_is_better: true
+      cuda_cores:
+        type: number
+        label: CUDA/Stream Processors
+        unit: ""
+        higher_is_better: true
+      boost_clock:
+        type: string
+        label: Boost Clock
+        unit: GHz
+        higher_is_better: true
+      memory_interface:
+        type: string
+        label: Memory Interface
+        unit: bit
+        higher_is_better: true
+      tdp:
+        type: string
+        label: TDP
+        unit: W
+        higher_is_better: false
+      outputs:
+        type: string
+        label: Display Outputs
+        unit: ""
+        higher_is_better: null
+
+  - slug: dishwashers
+    name: Dishwashers
+    description: Kitchen Dishwashers
+    specifications:
+      capacity:
+        type: string
+        label: Capacity
+        unit: place settings
+        higher_is_better: true
+      noise_level:
+        type: string
+        label: Noise Level
+        unit: dBA
+        higher_is_better: false
+      energy_star:
+        type: boolean
+        label: Energy Star Certified
+        unit: ""
+        higher_is_better: true
+      cycles:
+        type: number
+        label: Wash Cycles
+        unit: ""
+        higher_is_better: true
+      drying_type:
+        type: string
+        label: Drying Type
+        unit: ""
+        higher_is_better: null
+      dimensions:
+        type: string
+        label: Dimensions (HxWxD)
+        unit: inches
+        higher_is_better: null
+
+  - slug: microwaves
+    name: Microwaves
+    description: Microwave Ovens
+    specifications:
+      wattage:
+        type: string
+        label: Wattage
+        unit: W
+        higher_is_better: true
+      capacity:
+        type: string
+        label: Capacity
+        unit: cu ft
+        higher_is_better: true
+      turntable_diameter:
+        type: string
+        label: Turntable Diameter
+        unit: inches
+        higher_is_better: true
+      sensor_cooking:
+        type: boolean
+        label: Sensor Cooking
+        unit: ""
+        higher_is_better: true
+      convection:
+        type: boolean
+        label: Convection
+        unit: ""
+        higher_is_better: true
+      dimensions:
+        type: string
+        label: Dimensions (HxWxD)
+        unit: inches
+        higher_is_better: null
