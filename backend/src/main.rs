@@ -3,10 +3,8 @@ mod routes;
 
 use axum::{
     Router,
-    http::{
-        HeaderValue,
-        header::{AUTHORIZATION, CONTENT_TYPE},
-    },
+    http::header::{AUTHORIZATION, CONTENT_TYPE},
+    routing::get,
 };
 use sqlx::postgres::PgPoolOptions;
 use std::env;
@@ -52,6 +50,7 @@ pub async fn main() -> color_eyre::Result<()> {
 
     let app = Router::new()
         .nest("/api/v1", routes::api_routes())
+        .route("/", get(crate::routes::about::get_about))
         .layer(cors_layer)
         .with_state(state);
 
