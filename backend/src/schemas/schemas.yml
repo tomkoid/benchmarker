@@ -38,6 +38,96 @@ categories:
         label: Cache
         unit: MB
         higher_is_better: true
+      l1_cache:
+        type: string
+        label: L1 Cache
+        unit: KB
+        higher_is_better: true
+      l2_cache:
+        type: string
+        label: L2 Cache
+        unit: MB
+        higher_is_better: true
+      l3_cache:
+        type: string
+        label: L3 Cache
+        unit: MB
+        higher_is_better: true
+      architecture:
+        type: string
+        label: Architecture
+        unit: ""
+        higher_is_better: null
+      process_node:
+        type: string
+        label: Process Node
+        unit: nm
+        higher_is_better: false
+      max_memory:
+        type: string
+        label: Max Memory
+        unit: GB
+        higher_is_better: true
+      memory_type:
+        type: string
+        label: Memory Type
+        unit: ""
+        higher_is_better: null
+      memory_channels:
+        type: number
+        label: Memory Channels
+        unit: ""
+        higher_is_better: true
+      pcie_lanes:
+        type: string
+        label: PCIe Lanes
+        unit: ""
+        higher_is_better: true
+      pcie_version:
+        type: string
+        label: PCIe Version
+        unit: ""
+        higher_is_better: true
+      integrated_graphics:
+        type: string
+        label: Integrated Graphics
+        unit: ""
+        higher_is_better: null
+      max_temp:
+        type: string
+        label: Max Temperature
+        unit: °C
+        higher_is_better: false
+      unlocked:
+        type: boolean
+        label: Unlocked (Overclockable)
+        unit: ""
+        higher_is_better: true
+      virtualization:
+        type: boolean
+        label: Virtualization Support
+        unit: ""
+        higher_is_better: true
+      hyperthreading:
+        type: boolean
+        label: Hyperthreading/SMT
+        unit: ""
+        higher_is_better: true
+      ecc_support:
+        type: boolean
+        label: ECC Memory Support
+        unit: ""
+        higher_is_better: null
+      release_date:
+        type: string
+        label: Release Date
+        unit: ""
+        higher_is_better: null
+      lithography:
+        type: string
+        label: Lithography
+        unit: nm
+        higher_is_better: false
 
   - slug: gpus
     name: GPUs
@@ -143,3 +233,93 @@ categories:
         label: Dimensions (HxWxD)
         unit: inches
         higher_is_better: null
+      weight:
+        type: string
+        label: Weight
+        unit: lbs
+        higher_is_better: false
+      power_levels:
+        type: number
+        label: Power Levels
+        unit: ""
+        higher_is_better: true
+      grill_function:
+        type: boolean
+        label: Grill Function
+        unit: ""
+        higher_is_better: true
+      smart_features:
+        type: boolean
+        label: Smart/WiFi Enabled
+        unit: ""
+        higher_is_better: true
+      inverter_technology:
+        type: boolean
+        label: Inverter Technology
+        unit: ""
+        higher_is_better: true
+      child_lock:
+        type: boolean
+        label: Child Lock
+        unit: ""
+        higher_is_better: true
+      preset_programs:
+        type: number
+        label: Preset Programs
+        unit: ""
+        higher_is_better: true
+      defrost_modes:
+        type: number
+        label: Defrost Modes
+        unit: ""
+        higher_is_better: true
+      energy_rating:
+        type: string
+        label: Energy Rating
+        unit: ""
+        higher_is_better: null
+      noise_level:
+        type: string
+        label: Noise Level
+        unit: dB
+        higher_is_better: false
+      door_type:
+        type: string
+        label: Door Type
+        unit: ""
+        higher_is_better: null
+      interior_material:
+        type: string
+        label: Interior Material
+        unit: ""
+        higher_is_better: null
+      exterior_finish:
+        type: string
+        label: Exterior Finish
+        unit: ""
+        higher_is_better: null
+      installation_type:
+        type: string
+        label: Installation Type
+        unit: ""
+        higher_is_better: null
+      color:
+        type: string
+        label: Color
+        unit: ""
+        higher_is_better: null
+      warranty:
+        type: string
+        label: Warranty
+        unit: years
+        higher_is_better: true
+      eco_mode:
+        type: boolean
+        label: Eco Mode
+        unit: ""
+        higher_is_better: true
+      keep_warm_function:
+        type: boolean
+        label: Keep Warm Function
+        unit: ""
+        higher_is_better: true

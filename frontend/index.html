@@ -1,36 +1,39 @@
 <!DOCTYPE html>
 <html lang="cs">
-<meta author="Jakub Klášterka, Václav Pašek, Tomáš Zierl, Tadeáš Pokora, Štěpán Žítek">
 <head>
     <meta charset="UTF-8">
+    <meta name="author" content="Jakub Klášterka, Václav Pašek, Tomáš Zierl, Tadeáš Pokora, Štěpán Žítek">
     <title>UtilBench</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="container">
-<header>
-  <nav>
-    <a href="#" onclick="event.preventDefault(); navigateTo('home')">Domů</a>
-    <a href="#" onclick="event.preventDefault(); navigateTo('kategorie')">Kategorie</a>
-    <a href="#" onclick="event.preventDefault(); navigateTo('o-projektu')">O projektu</a>
-  </nav>
-</header>
-<main>
-<!-- ============ DOMŮ PAGE ============ -->
-<div id="home" class="page">
-    <section class="hero">
-        <h1>Vyber si spotřebič chytře</h1>
-        <p>Porovnání výkonu, ceny a spolehlivosti bez zbytečných recenzí</p>
-    </section>
-    <div class="global-search-bar">
-      <div class="search-box">
-        <input type="text" id="searchInput" placeholder="Vyhledat produkty...">
-        <div id="searchResults"></div>
-      </div>
-    </div>
-    <section class="categories">
-        <h2>Kategorie</h2>
-        <div class="category-grid">
+    <div class="container">
+        <div class="sidebar-logo">
+            <img src="logo.jpg" alt="UTIL-BENCH Logo" class="logo-img">
+        </div>
+        <header>
+            <nav>
+                <a href="#" onclick="event.preventDefault(); navigateTo('home')">Domů</a>
+                <a href="#" onclick="event.preventDefault(); navigateTo('kategorie')">Kategorie</a>
+                <a href="#" onclick="event.preventDefault(); navigateTo('o-projektu')">O projektu</a>
+            </nav>
+        </header>
+        <main>
+            <!-- ============ DOMŮ PAGE ============ -->
+            <div id="home" class="page">
+                <section class="hero">
+                    <h1>Vyber si spotřebič chytře</h1>
+                    <p>Porovnání výkonu, ceny a spolehlivosti bez zbytečných recenzí</p>
+                </section>
+                <div class="global-search-bar">
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="Vyhledat produkty...">
+                        <div id="searchResults"></div>
+                    </div>
+                </div>
+                <section class="categories">
+                    <h2>Kategorie</h2>
+                    <div class="category-grid">
             <div class="category-item">
                 <div class="category" onclick="toggleCategory(this)">
                     <img src="images/kitchen-category.png" alt="Kuchyň" class="category-image"> Kuchyň
@@ -82,16 +85,16 @@
                     <a href="#" onclick="event.preventDefault(); navigateTo('desktop');" class="subcategory">Stolní počítače</a>
                 </div>
             </div>
-        </div>
-    </section>
-    <section class="recommended">
-      <h2 style="margin-top:30px;">Doporučené</h2>
-      <div id="recommended-products" class="products-container"></div>
-    </section>
-    <section class="benchmark" id="benchmark-home">
-        <!-- Produkty se dynamicky načítají z script.js -->
-    </section>
-</div>
+                    </div>
+                </section>
+                <section class="recommended">
+                    <h2 style="margin-top:30px;">Doporučené</h2>
+                    <div id="recommended-products" class="products-container"></div>
+                </section>
+                <section class="benchmark" id="benchmark-home">
+                    <!-- Produkty se dynamicky načítají z script.js -->
+                </section>
+            </div>
 <!-- ============ KATEGORIE PAGE ============ -->
 <div id="kategorie" class="page">
     <section class="hero">

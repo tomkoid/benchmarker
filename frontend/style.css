@@ -1,4 +1,4 @@
-/* Recommended products */
+/* ========== RECOMMENDED PRODUCTS ========== */
 .recommended {
     margin: 0 auto;
     max-width: 1300px;
@@ -12,6 +12,7 @@
     color: #333;
     font-weight: 600;
 }
+
 #recommended-products.products-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -56,6 +57,7 @@
     line-height: 1.4;
     flex: 1;
 }
+
 #recommended-products .card-image-small {
     width: 90px;
     height: 90px;
@@ -108,7 +110,7 @@
     border-left: 3px solid #667eea;
 }
 
-/* Compare menu */
+/* ========== COMPARE MENU ========== */
 #compare-list {
     margin: 30px 0 0 0;
     padding: 20px 10px 10px 10px;
@@ -162,6 +164,7 @@
 .compare-btn:hover:not(.active) {
     background: #5a3d91;
 }
+/* ========== GLOBAL STYLES ========== */
 * {
     box-sizing: border-box;
     font-family: Arial, sans-serif;
@@ -188,7 +191,33 @@ body {
     min-height: 100vh;
 }
 
-/* HEADER - SIDEBAR */
+/* ========== HEADER & SIDEBAR ========== */
+.sidebar-logo {
+    width: 250px;
+    height: 120px;
+    background: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1002;
+    border-radius: 0;
+    border-bottom: none;
+    border-right: 3px solid #764ba2;
+    box-sizing: border-box;
+}
+
+.logo-img {
+    width: 100%;
+    height: 120px;
+    max-width: 250px;
+    object-fit: contain;
+    display: block;
+    margin: 0;
+}
+
 header {
     background: linear-gradient(to bottom, #1e1e2f, #2a2a3f);
     color: white;
@@ -203,41 +232,6 @@ header {
     box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
     border-radius: 0 0 20px 0;
 }
-
-.sidebar-logo {
-    width: 250px;
-    height: 120px;
-    background: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: fixed;
-    top: 0;
-    margin-top: 0;
-    padding-top: 0;
-    left: 0;
-    z-index: 1002;
-    border-radius: 0;
-    border-bottom: none;
-    border-right: 3px solid #764ba2;
-    box-sizing: border-box;
-}
-
-main {
-    margin-left: 250px;
-    padding-top: 0;
-}
-
-
-.logo-img {
-    width: 100%;
-    height: 120px;
-    max-width: 250px;
-    object-fit: contain;
-    display: block;
-    margin: 0;
-}
-
 
 header nav {
     display: flex;
@@ -258,10 +252,11 @@ header a:hover {
 
 main {
     margin-left: 250px;
+    padding-top: 0;
     flex: 1;
 }
 
-/* PAGE NAVIGATION */
+/* ========== PAGE NAVIGATION ========== */
 .page {
     display: none;
     min-height: calc(100vh - 50px);
@@ -271,7 +266,7 @@ main {
     display: block;
 }
 
-/* GLOBAL SEARCH BAR */
+/* ========== GLOBAL SEARCH BAR ========== */
 .global-search-bar {
     background: transparent;
     padding: 20px 40px;
@@ -333,7 +328,7 @@ main {
     color: #667eea;
 }
 
-/* HERO */
+/* ========== HERO SECTION ========== */
 .hero {
     padding: 60px;
     text-align: center;
@@ -341,7 +336,7 @@ main {
     color: white;
 }
 
-/* CATEGORIES */
+/* ========== CATEGORIES ========== */
 .categories {
     padding: 40px;
     text-align: center;
@@ -462,7 +457,7 @@ main {
     background: #e8ecf0;
 }
 
-/* PRODUCTS */
+/* ========== PRODUCTS ========== */
 .products {
     padding: 40px;
 }
@@ -519,7 +514,7 @@ main {
     background: #5a67d8;
 }
 
-/* ABOUT */
+/* ========== ABOUT PAGE ========== */
 .about {
     padding: 40px;
     max-width: 900px;
@@ -561,7 +556,7 @@ main {
     margin: 10px 0;
 }
 
-/* BENCHMARK */
+/* ========== BENCHMARK & PRODUCT CARDS ========== */
 .benchmark {
     padding: 40px 20px;
     min-height: 400px;
@@ -608,8 +603,7 @@ main {
     border-color: #667eea;
 }
 
-/* CARD IMAGE */
-
+/* Card Images */
 .card-image {
     width: 100%;
     height: 120px;
@@ -639,6 +633,7 @@ main {
     transform: scale(1.05);
 }
 
+/* Card Headers */
 .products-container .card-header {
     padding: 18px 22px;
     background: transparent;
@@ -674,7 +669,6 @@ main {
     font-weight: 600;
 }
 
-/* Small image on the left of text - for all cards */
 .card-header .card-image-small {
     width: 90px;
     height: 90px;
@@ -723,6 +717,7 @@ main {
     padding: 10px 25px;
 }
 
+/* Card Body & Specs */
 .card-body {
     padding: 20px 25px;
     flex: 1;
@@ -820,7 +815,7 @@ th, td {
     border-radius: 8px;
 }
 
-/* FOOTER */
+/* ========== FOOTER ========== */
 footer {
     text-align: center;
     padding: 8px;

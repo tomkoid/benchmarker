@@ -13,17 +13,15 @@ function isSPA() {
 async function loadCategories() {
     try {
         console.log('Loading categories from API:', CATEGORIES_API_URL);
-        
         const response = await fetch(CATEGORIES_API_URL);
-        
+
         if (!response.ok) {
             throw new Error(`API Error: ${response.status}`);
         }
-        
+
         const data = await response.json();
         categories = data.categories || data;
         console.log('Categories loaded:', categories);
-        
     } catch (error) {
         console.error('Error loading categories:', error);
     }
@@ -38,29 +36,28 @@ function getCurrentPageTag() {
 // Filter products by category_id and tag on current page
 function filterProductsByPage(allProducts) {
     const pageTag = getCurrentPageTag();
-    
+
     if (pageTag === 'index') {
         return allProducts;
     }
-    
+
     const config = pageConfigMap[pageTag];
     if (!config) return allProducts;
-    
+
     const { categoryIds, tag } = config;
-    
+
     let filtered = allProducts.filter(product => {
         if (product.category_id === null || product.category_id === undefined) return false;
         return categoryIds.includes(Number(product.category_id));
     });
-    
-    // If page has a specific tag, filter by it too
+
     if (tag) {
         filtered = filtered.filter(product => {
             if (!product.tag) return false;
             return product.tag.toLowerCase().includes(tag.toLowerCase());
         });
     }
-    
+
     return filtered;
 }
 
@@ -68,21 +65,18 @@ function filterProductsByPage(allProducts) {
 async function loadProducts() {
     try {
         console.log('Loading data from API:', API_URL);
-        
         const response = await fetch(API_URL);
-        
+
         if (!response.ok) {
             throw new Error(`API Error: ${response.status}`);
         }
-        
+
         const data = await response.json();
         products = data.products || data;
         console.log('Data loaded:', products);
-        
-        // Filter products by current page
+
         const filteredProducts = filterProductsByPage(products);
         displayBenchmark(filteredProducts);
-        
     } catch (error) {
         console.error('Error loading data:', error);
         const benchmarkSection = document.querySelector('.benchmark');
@@ -96,20 +90,19 @@ async function loadProducts() {
 function displayBenchmark(data) {
     const benchmarkSection = document.querySelector('.benchmark');
     if (!benchmarkSection) return;
-    
+
     benchmarkSection.innerHTML = '<h2>Benchmark – Porovnání Produktů</h2><div class="products-container"></div>';
     const container = benchmarkSection.querySelector('.products-container');
-    
+
     if (!data || data.length === 0) {
         benchmarkSection.innerHTML += '<p>Žádné produkty nenalezeny.</p>';
         return;
     }
-    
+
     data.forEach(product => {
         const card = document.createElement('div');
         card.className = 'card';
-        
-        // Prepare image
+
         let imageUrl = '';
         const productId = product.id || product.product_id;
         if (productId) {
@@ -117,7 +110,7 @@ function displayBenchmark(data) {
         } else {
             imageUrl = 'images/placeholder.png';
         }
-        
+
         let specsHTML = '';
         if (product.specifications && typeof product.specifications === 'object') {
             specsHTML = '<div class="card-specs"><table>';
@@ -126,9 +119,9 @@ function displayBenchmark(data) {
             }
             specsHTML += '</table></div>';
         }
-        
+
         const categoryName = product.category_name || 'Ostatní';
-        
+
         card.innerHTML = `
             <div class="card-header">
                 <div class="card-image-small"><img src="${imageUrl}" alt="${product.name}" onerror="this.parentElement.style.background='linear-gradient(135deg, #667eea 0%, #764ba2 100%)'"></div>
@@ -139,7 +132,7 @@ function displayBenchmark(data) {
                 ${specsHTML}
             </div>
         `;
-        
+
         container.appendChild(card);
     });
 }
@@ -151,25 +144,21 @@ function filterAndDisplay(query) {
         displayBenchmark(filteredProducts);
         return;
     }
-    
+
     const pageFiltered = filterProductsByPage(products);
-    const filtered = pageFiltered.filter(p => 
+    const filtered = pageFiltered.filter(p =>
         (p.name && p.name.toLowerCase().includes(query.toLowerCase())) ||
         (p.category_name && p.category_name.toLowerCase().includes(query.toLowerCase()))
     );
-    
+
     displayBenchmark(filtered);
 }
 
 // Start loading after page loads
 document.addEventListener('DOMContentLoaded', async () => {
-    // Load categories first
     await loadCategories();
-    
-    // Then load products
     loadProducts();
-    
-    // Listen to search box changes
+
     const searchInput = document.getElementById('searchInput');
     if (searchInput) {
         searchInput.addEventListener('input', (e) => {
