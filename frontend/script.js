@@ -6,7 +6,7 @@ let categories = [];
 
 // Check if using SPA version
 function isSPA() {
-    return window.location.pathname.includes('index-spa.html');
+    return window.location.pathname.includes('index.html');
 }
 
 // Load categories from API
