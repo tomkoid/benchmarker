@@ -8,100 +8,446 @@
 </head>
 <body>
 <div class="container">
+<div class="sidebar-logo">
+  <img src="logo.jpg" alt="UTIL-BENCH Logo" class="logo-img">
+</div>
 <header>
-    <div class="logo-container">
-        <img src="logo.jpg" alt="UTIL-BENCH Logo" class="logo-img">
-        <div class="logo">UTIL-BENCH</div>
-    </div>
-    <nav>
-        <a href="index.html">Domů</a>
-        <a href="kategorie.html">Kategorie</a>
-        <a href="o-projektu.html">O projektu</a>
-    </nav>
+  <nav>
+    <a href="#" onclick="event.preventDefault(); navigateTo('home')">Domů</a>
+    <a href="#" onclick="event.preventDefault(); navigateTo('kategorie')">Kategorie</a>
+    <a href="#" onclick="event.preventDefault(); navigateTo('o-projektu')">O projektu</a>
+  </nav>
 </header>
 
+
 <main>
-<div class="global-search-bar">
-    <div class="search-box">
+
+<!-- ============ DOMŮ PAGE ============ -->
+<div id="home" class="page">
+    <section class="hero">
+        <h1>Vyber si spotřebič chytře</h1>
+        <p>Porovnání výkonu, ceny a spolehlivosti bez zbytečných recenzí</p>
+    </section>
+    <div class="global-search-bar">
+      <div class="search-box">
         <input type="text" id="searchInput" placeholder="Vyhledat produkty...">
         <div id="searchResults"></div>
+      </div>
     </div>
+    </section>
+
+    <section class="categories">
+        <h2>Kategorie</h2>
+        <div class="category-grid">
+            <div class="category-item">
+                <div class="category" onclick="toggleCategory(this)">
+                    <img src="images/kitchen-category.png" alt="Kuchyň" class="category-image"> Kuchyň
+                    <span class="toggle">▼</span>
+                </div>
+                <div class="subcategories">
+                    <a href="#" onclick="event.preventDefault(); navigateTo('kuchyn');" class="subcategory">Všechny produkty</a>
+                    <a href="#" onclick="event.preventDefault(); navigateTo('mikrovlnky');" class="subcategory">Mikrovlnky</a>
+                    <a href="#" onclick="event.preventDefault(); navigateTo('trouba');" class="subcategory">Trouby</a>
+                    <a href="#" onclick="event.preventDefault(); navigateTo('lednice');" class="subcategory">Lednice</a>
+                    <a href="#" onclick="event.preventDefault(); navigateTo('varnedeska');" class="subcategory">Varné desky</a>
+                    <a href="#" onclick="event.preventDefault(); navigateTo('myckanadobi');" class="subcategory">Myčky nádobí</a>
+                    <a href="#" onclick="event.preventDefault(); navigateTo('kavorny');" class="subcategory">Kávovary</a>
+                    <a href="#" onclick="event.preventDefault(); navigateTo('fritezy');" class="subcategory">Fritézy</a>
+                    <a href="#" onclick="event.preventDefault(); navigateTo('mixery');" class="subcategory">Mixéry</a>
+                </div>
+            </div>
+            <div class="category-item">
+                <div class="category" onclick="toggleCategory(this)">
+                    <img src="images/bathroom-category.png" alt="Koupelna" class="category-image"> Koupelna
+                    <span class="toggle">▼</span>
+                </div>
+                <div class="subcategories">
+                    <a href="#" onclick="event.preventDefault(); navigateTo('koupelna');" class="subcategory">Všechny produkty</a>
+                    <a href="#" onclick="event.preventDefault(); navigateTo('pracky');" class="subcategory">Pračky</a>
+                    <a href="#" onclick="event.preventDefault(); navigateTo('ohrivac');" class="subcategory">Ohřívače vody</a>
+                    <a href="#" onclick="event.preventDefault(); navigateTo('ventilator');" class="subcategory">Ventilátory</a>
+                    <a href="#" onclick="event.preventDefault(); navigateTo('susicka');" class="subcategory">Sušičky prádla</a>
+                    <a href="#" onclick="event.preventDefault(); navigateTo('sprchovka');" class="subcategory">Sprchové hlavice</a>
+                    <a href="#" onclick="event.preventDefault(); navigateTo('toaleta');" class="subcategory">Toaletní prkénka</a>
+                    <a href="#" onclick="event.preventDefault(); navigateTo('odsavac');" class="subcategory">Odsavače par</a>
+                    <a href="#" onclick="event.preventDefault(); navigateTo('zrcadlo');" class="subcategory">Zrcadla s osvětlením</a>
+                </div>
+            </div>
+            <div class="category-item">
+                <div class="category" onclick="toggleCategory(this)">
+                    <img src="images/computer-category.png" alt="Počítače" class="category-image"> Počítače
+                    <span class="toggle">▼</span>
+                </div>
+                <div class="subcategories">
+                    <a href="#" onclick="event.preventDefault(); navigateTo('pocitace');" class="subcategory">Všechny produkty</a>
+                    <a href="#" onclick="event.preventDefault(); navigateTo('cpu');" class="subcategory">CPU</a>
+                    <a href="#" onclick="event.preventDefault(); navigateTo('gpu');" class="subcategory">GPU</a>
+                    <a href="#" onclick="event.preventDefault(); navigateTo('component');" class="subcategory">Komponenty</a>
+                    <a href="#" onclick="event.preventDefault(); navigateTo('keyboard');" class="subcategory">Klávesnice</a>
+                    <a href="#" onclick="event.preventDefault(); navigateTo('mouse');" class="subcategory">Myši</a>
+                    <a href="#" onclick="event.preventDefault(); navigateTo('monitor');" class="subcategory">Monitory</a>
+                    <a href="#" onclick="event.preventDefault(); navigateTo('laptop');" class="subcategory">Notebooky</a>
+                    <a href="#" onclick="event.preventDefault(); navigateTo('desktop');" class="subcategory">Stolní počítače</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="recommended">
+      <h2 style="margin-top:30px;">Doporučené</h2>
+      <div id="recommended-products" class="products-container"></div>
+    </section>
+
+    <section class="benchmark" id="benchmark-home">
+        <!-- Produkty se dynamicky načítají z script.js -->
+    </section>
 </div>
-<section class="hero">
-    <h1>Vyber si spotřebič chytře</h1>
-    <p>Porovnání výkonu, ceny a spolehlivosti bez zbytečných recenzí</p>
-</section>
 
-<section class="categories">
-    <h2>Kategorie</h2>
-    <div class="category-grid">
-        <div class="category-item">
-            <img src="images/kitchen-category.png" alt="Kuchyň" class="category-image">
-            <div class="category" onclick="toggleCategory(this)">
-                🍽️ Kuchyň
-                <span class="toggle">▼</span>
+<!-- ============ KATEGORIE PAGE ============ -->
+<div id="kategorie" class="page">
+    <section class="hero">
+        <h1>Kategorie</h1>
+        <p>Vyberte kategorii a porovnávejte spotřebiče</p>
+    </section>
+
+    <section class="categories">
+        <div class="category-grid">
+            <div class="category-item">
+                <div class="category" onclick="toggleCategory(this)">
+                    <img src="images/kitchen-category.png" alt="Kuchyň" class="category-image"> Kuchyně           
+                    <span class="toggle">▼</span>
+                </div>
+                <div class="subcategories">
+                    <a href="#" onclick="event.preventDefault(); navigateTo('kuchyn');" class="subcategory">Všechny produkty</a>
+                    <a href="#" onclick="event.preventDefault(); navigateTo('mikrovlnky');" class="subcategory">Mikrovlnky</a>
+                    <a href="#" onclick="event.preventDefault(); navigateTo('trouba');" class="subcategory">Trouby</a>
+                    <a href="#" onclick="event.preventDefault(); navigateTo('lednice');" class="subcategory">Lednice</a>
+                    <a href="#" onclick="event.preventDefault(); navigateTo('varnedeska');" class="subcategory">Varné desky</a>
+                    <a href="#" onclick="event.preventDefault(); navigateTo('myckanadobi');" class="subcategory">Myčky nádobí</a>
+                    <a href="#" onclick="event.preventDefault(); navigateTo('kavorny');" class="subcategory">Kávovary</a>
+                    <a href="#" onclick="event.preventDefault(); navigateTo('fritezy');" class="subcategory">Fritézy</a>
+                    <a href="#" onclick="event.preventDefault(); navigateTo('mixery');" class="subcategory">Mixéry</a>
+                </div>
             </div>
-            <div class="subcategories">
-                <a href="kuchyn.html" class="subcategory">Všechny produkty</a>
-                <a href="mikrovlnky.html" class="subcategory">Mikrovlnky</a>
-                <a href="#" class="subcategory">Trouby</a>
-                <a href="#" class="subcategory">Lednice</a>
-                <a href="#" class="subcategory">Varné desky</a>
-                <a href="#" class="subcategory">Myčky nádobí</a>
-                <a href="#" class="subcategory">Kávovary</a>
-                <a href="#" class="subcategory">Fritézy</a>
-                <a href="#" class="subcategory">Mixéry</a>
+            <div class="category-item">
+                <div class="category" onclick="toggleCategory(this)">
+                    <img src="images/bathroom-category.png" alt="Koupelna" class="category-image"> Koupelna
+                    <span class="toggle">▼</span>
+                </div>
+                <div class="subcategories">
+                    <a href="#" onclick="event.preventDefault(); navigateTo('koupelna');" class="subcategory">Všechny produkty</a>
+                    <a href="#" onclick="event.preventDefault(); navigateTo('pracky');" class="subcategory">Pračky</a>
+                    <a href="#" onclick="event.preventDefault(); navigateTo('ohrivac');" class="subcategory">Ohřívače vody</a>
+                    <a href="#" onclick="event.preventDefault(); navigateTo('ventilator');" class="subcategory">Ventilátory</a>
+                    <a href="#" onclick="event.preventDefault(); navigateTo('susicka');" class="subcategory">Sušičky prádla</a>
+                    <a href="#" onclick="event.preventDefault(); navigateTo('sprchovka');" class="subcategory">Sprchové hlavice</a>
+                    <a href="#" onclick="event.preventDefault(); navigateTo('toaleta');" class="subcategory">Toaletní prkénka</a>
+                    <a href="#" onclick="event.preventDefault(); navigateTo('odsavac');" class="subcategory">Odsavače par</a>
+                    <a href="#" onclick="event.preventDefault(); navigateTo('zrcadlo');" class="subcategory">Zrcadla s osvětlením</a>
+                </div>
+            </div>
+            <div class="category-item">
+                <div class="category" onclick="toggleCategory(this)">
+                    <img src="images/computer-category.png" alt="Počítače" class="category-image"> Počítače
+                    <span class="toggle">▼</span>
+                </div>
+                <div class="subcategories">
+                    <a href="#" onclick="event.preventDefault(); navigateTo('pocitace');" class="subcategory">Všechny produkty</a>
+                    <a href="#" onclick="event.preventDefault(); navigateTo('cpu');" class="subcategory">CPU</a>
+                    <a href="#" onclick="event.preventDefault(); navigateTo('gpu');" class="subcategory">GPU</a>
+                    <a href="#" onclick="event.preventDefault(); navigateTo('component');" class="subcategory">Komponenty</a>
+                    <a href="#" onclick="event.preventDefault(); navigateTo('keyboard');" class="subcategory">Klávesnice</a>
+                    <a href="#" onclick="event.preventDefault(); navigateTo('mouse');" class="subcategory">Myši</a>
+                    <a href="#" onclick="event.preventDefault(); navigateTo('monitor');" class="subcategory">Monitory</a>
+                    <a href="#" onclick="event.preventDefault(); navigateTo('laptop');" class="subcategory">Notebooky</a>
+                    <a href="#" onclick="event.preventDefault(); navigateTo('desktop');" class="subcategory">Stolní počítače</a>
+                </div>
             </div>
         </div>
-        <div class="category-item">
-            <img src="images/bathroom-category.png" alt="Koupelna" class="category-image">
-            <div class="category" onclick="toggleCategory(this)">
-                🛁 Koupelna
-                <span class="toggle">▼</span>
-            </div>
-            <div class="subcategories">
-                <a href="koupelna.html" class="subcategory">Všechny produkty</a>
-                <a href="pracky.html" class="subcategory">Pračky</a>
-                <a href="#" class="subcategory">Ohřívače vody</a>
-                <a href="#" class="subcategory">Ventilátory</a>
-                <a href="#" class="subcategory">Sušičky prádla</a>
-                <a href="#" class="subcategory">Sprchové hlavice</a>
-                <a href="#" class="subcategory">Toaletní prkénka</a>
-                <a href="#" class="subcategory">Odsavače par</a>
-                <a href="#" class="subcategory">Zrcadla s osvětlením</a>
-            </div>
+    </section>
+</div>
+
+<!-- ============ O PROJEKTU PAGE ============ -->
+<div id="o-projektu" class="page">
+    <section class="hero">
+        <h1>O projektu</h1>
+        <p>Nástroj pro inteligentní porovnávání domácích spotřebičů</p>
+    </section>
+
+    <section class="about">
+        <div class="about-content">
+            <h2>Co je UtilBench?</h2>
+            <p>UtilBench je online platforma zaměřená na porovnávání domácích spotřebičů. 
+               Naším cílem je pomoci vám vybrat si ten správný spotřebič na základě skutečných parametrů, ceny a spolehlivosti – bez zbytečných a zavádějících recenzí.</p>
+            
+            <h2>Naše mise</h2>
+            <p>Chceme demystifikovat nákup domácích spotřebičů. Místo dlouhých textů plných subjektivních názorů vám poskytujeme přesná data, benchmark testy a porovnání na jednom místě.</p>
+            
+            <h2>Jak to funguje?</h2>
+            <ul>
+                <li><strong>Výběr kategorie:</strong> Zvolte si kategorii spotřebiče (Kuchyň, Koupelna, atd.)</li>
+                <li><strong>Porovnání produktů:</strong> Podívejte se na konkrétní produkty a jejich parametry</li>
+                <li><strong>Snadné rozhodnutí:</strong> Všechna data jsou v přehledné tabulce</li>
+                <li><strong>Nákup:</strong> Přímý odkaz na ověřené obchody</li>
+            </ul>
+            
+            <h2>Autor a tým</h2>
+            <p><strong>Tvůrci projektu:</strong></p>
+            <ul>
+                <li>Jakub Klášterka</li>
+                <li>Václav Pašek</li>
+                <li>Tomáš Zierl</li>
+            </ul>
+            <h2>Kontakt</h2>
+            <p>Máte návrhy nebo připomínky? Rádi je slyšíme!</p>
+            <p><strong>Email:</strong></p>
         </div>
-    </div>
-</section>
+    </section>
+</div>
 
-<section class="benchmark">
-    <h2>Benchmark – Mikrovlnky</h2>
+<!-- ============ PRODUKTY PAGES ============ -->
+<!-- KUCHYŇ -->
+<div id="kuchyn" class="page">
+    <section class="hero">
+        <h1>🍽️ Kuchyň</h1>
+        <p>Porovnání spotřebičů do kuchyně</p>
+    </section>
+    <section class="benchmark" id="benchmark-kuchyn"></section>
+</div>
 
-    <div class="card">
-        <h3>Samsung MW3500</h3>
-        <table>
-            <tr>
-                <th>Max. teplota</th>
-                <td>100 °C</td>
-            </tr>
-            <tr>
-                <th>Doba ohřevu</th>
-                <td>2:30 min</td>
-            </tr>
-            <tr>
-                <th>Ohřev</th>
-                <td>Ze středu</td>
-            </tr>
-            <tr>
-                <th>Spolehlivost</th>
-                <td>8.5 / 10</td>
-            </tr>
-            <tr>
-                <th>Cena</th>
-                <td>2 990 Kč</td>
-            </tr>
-        </table>
-</section>
+<!-- MIKROVLNKY -->
+<div id="mikrovlnky" class="page">
+    <section class="hero">
+        <h1>Mikrovlnky</h1>
+        <p>Porovnání mikrovlnných trouб</p>
+    </section>
+    <section class="benchmark" id="benchmark-mikrovlnky"></section>
+</div>
+
+<!-- TROUBA -->
+<div id="trouba" class="page">
+    <section class="hero">
+        <h1>Trouby</h1>
+        <p>Porovnání elektrických trub</p>
+    </section>
+    <section class="benchmark" id="benchmark-trouba"></section>
+</div>
+
+<!-- LEDNICE -->
+<div id="lednice" class="page">
+    <section class="hero">
+        <h1>Lednice</h1>
+        <p>Porovnání chladičů</p>
+    </section>
+    <section class="benchmark" id="benchmark-lednice"></section>
+</div>
+
+<!-- VARNEDESKA -->
+<div id="varnedeska" class="page">
+    <section class="hero">
+        <h1>Varné desky</h1>
+        <p>Porovnání varných desek</p>
+    </section>
+    <section class="benchmark" id="benchmark-varnedeska"></section>
+</div>
+
+<!-- MYCKANADOBI -->
+<div id="myckanadobi" class="page">
+    <section class="hero">
+        <h1>Myčky nádobí</h1>
+        <p>Porovnání myček nádobí</p>
+    </section>
+    <section class="benchmark" id="benchmark-myckanadobi"></section>
+</div>
+
+<!-- KAVORNY -->
+<div id="kavorny" class="page">
+    <section class="hero">
+        <h1>Kávovary</h1>
+        <p>Porovnání kávoven</p>
+    </section>
+    <section class="benchmark" id="benchmark-kavorny"></section>
+</div>
+
+<!-- FRITEZY -->
+<div id="fritezy" class="page">
+    <section class="hero">
+        <h1>Fritézy</h1>
+        <p>Porovnání fritéz</p>
+    </section>
+    <section class="benchmark" id="benchmark-fritezy"></section>
+</div>
+
+<!-- MIXERY -->
+<div id="mixery" class="page">
+    <section class="hero">
+        <h1>Mixéry</h1>
+        <p>Porovnání mixérů</p>
+    </section>
+    <section class="benchmark" id="benchmark-mixery"></section>
+</div>
+
+<!-- KOUPELNA -->
+<div id="koupelna" class="page">
+    <section class="hero">
+        <h1>🚿 Koupelna</h1>
+        <p>Porovnání spotřebičů do koupelny</p>
+    </section>
+    <section class="benchmark" id="benchmark-koupelna"></section>
+</div>
+
+<!-- PRACKY -->
+<div id="pracky" class="page">
+    <section class="hero">
+        <h1>Pračky</h1>
+        <p>Porovnání pracích strojů</p>
+    </section>
+    <section class="benchmark" id="benchmark-pracky"></section>
+</div>
+
+<!-- OHRIVAC -->
+<div id="ohrivac" class="page">
+    <section class="hero">
+        <h1>Ohřívače vody</h1>
+        <p>Porovnání ohřívačů vody</p>
+    </section>
+    <section class="benchmark" id="benchmark-ohrivac"></section>
+</div>
+
+<!-- VENTILATOR -->
+<div id="ventilator" class="page">
+    <section class="hero">
+        <h1>Ventilátory</h1>
+        <p>Porovnání ventilátorů</p>
+    </section>
+    <section class="benchmark" id="benchmark-ventilator"></section>
+</div>
+
+<!-- SUSICKA -->
+<div id="susicka" class="page">
+    <section class="hero">
+        <h1>Sušičky prádla</h1>
+        <p>Porovnání sušiček prádla</p>
+    </section>
+    <section class="benchmark" id="benchmark-susicka"></section>
+</div>
+
+<!-- SPRCHOVKA -->
+<div id="sprchovka" class="page">
+    <section class="hero">
+        <h1>Sprchové hlavice</h1>
+        <p>Porovnání sprchových hlavic</p>
+    </section>
+    <section class="benchmark" id="benchmark-sprchovka"></section>
+</div>
+
+<!-- TOALETA -->
+<div id="toaleta" class="page">
+    <section class="hero">
+        <h1>Toaletní prkénka</h1>
+        <p>Porovnání toaletních prkének</p>
+    </section>
+    <section class="benchmark" id="benchmark-toaleta"></section>
+</div>
+
+<!-- ODSAVAC -->
+<div id="odsavac" class="page">
+    <section class="hero">
+        <h1>Odsavače par</h1>
+        <p>Porovnání odsavačů par</p>
+    </section>
+    <section class="benchmark" id="benchmark-odsavac"></section>
+</div>
+
+<!-- ZRCADLO -->
+<div id="zrcadlo" class="page">
+    <section class="hero">
+        <h1>Zrcadla s osvětlením</h1>
+        <p>Porovnání zrcadel s osvětlením</p>
+    </section>
+    <section class="benchmark" id="benchmark-zrcadlo"></section>
+</div>
+
+<!-- POCITACE -->
+<div id="pocitace" class="page">
+    <section class="hero">
+        <h1>💻 Počítače</h1>
+        <p>Porovnání počítačů a komponent</p>
+    </section>
+    <section class="benchmark" id="benchmark-pocitace"></section>
+</div>
+
+<!-- CPU -->
+<div id="cpu" class="page">
+    <section class="hero">
+        <h1>Procesory (CPU)</h1>
+        <p>Porovnání procesorů ze všech výrobců</p>
+    </section>
+    <section class="benchmark" id="benchmark-cpu"></section>
+</div>
+
+<!-- GPU -->
+<div id="gpu" class="page">
+    <section class="hero">
+        <h1>Grafické karty (GPU)</h1>
+        <p>Porovnání grafických karet</p>
+    </section>
+    <section class="benchmark" id="benchmark-gpu"></section>
+</div>
+
+<!-- COMPONENT -->
+<div id="component" class="page">
+    <section class="hero">
+        <h1>Komponenty</h1>
+        <p>Porovnání počítačových komponent</p>
+    </section>
+    <section class="benchmark" id="benchmark-component"></section>
+</div>
+
+<!-- KEYBOARD -->
+<div id="keyboard" class="page">
+    <section class="hero">
+        <h1>Klávesnice</h1>
+        <p>Porovnání klávesnic</p>
+    </section>
+    <section class="benchmark" id="benchmark-keyboard"></section>
+</div>
+
+<!-- MOUSE -->
+<div id="mouse" class="page">
+    <section class="hero">
+        <h1>Myši</h1>
+        <p>Porovnání počítačových myší</p>
+    </section>
+    <section class="benchmark" id="benchmark-mouse"></section>
+</div>
+
+<!-- MONITOR -->
+<div id="monitor" class="page">
+    <section class="hero">
+        <h1>Monitory</h1>
+        <p>Porovnání monitorů</p>
+    </section>
+    <section class="benchmark" id="benchmark-monitor"></section>
+</div>
+
+<!-- LAPTOP -->
+<div id="laptop" class="page">
+    <section class="hero">
+        <h1>Notebooky</h1>
+        <p>Porovnání notebooků</p>
+    </section>
+    <section class="benchmark" id="benchmark-laptop"></section>
+</div>
+
+<!-- DESKTOP -->
+<div id="desktop" class="page">
+    <section class="hero">
+        <h1>Stolní počítače</h1>
+        <p>Porovnání stolních počítačů</p>
+    </section>
+    <section class="benchmark" id="benchmark-desktop"></section>
+</div>
 
 <footer>
     <p>© 2026 UTIL-BENCH</p>
@@ -110,30 +456,389 @@
 </div>
 
 <script>
+// ============ SINGLE PAGE APP NAVIGATION ============
+// API URLs
+const API_URL = 'https://utilbench-api.tomkoid.cz/api/v1/products';
+const CATEGORIES_API_URL = 'https://utilbench-api.tomkoid.cz/api/v1/categories';
+
+let products = [];
+let categories = [];
+let currentPage = 'home';
+
+// Mapování page ID na kategorie a tagy pro filtraci
+const pageConfigMap = {
+  'cpu': { categoryIds: [1], tag: 'cpu' },
+  'gpu': { categoryIds: [1], tag: 'gpu' },
+  'component': { categoryIds: [1], tag: 'component' },
+  'keyboard': { categoryIds: [1], tag: 'keyboard' },
+  'mouse': { categoryIds: [1], tag: 'mouse' },
+  'monitor': { categoryIds: [1], tag: 'monitor' },
+  'laptop': { categoryIds: [1], tag: 'laptop' },
+  'desktop': { categoryIds: [1], tag: 'desktop' },
+  'pocitace': { categoryIds: [1], tag: null },
+  'mikrovlnky': { categoryIds: [4], tag: 'microwave' },
+  'trouba': { categoryIds: [4], tag: 'oven' },
+  'lednice': { categoryIds: [4], tag: 'fridge' },
+  'varnedeska': { categoryIds: [4], tag: 'cooktop' },
+  'myckanadobi': { categoryIds: [4], tag: 'dishwasher' },
+  'kavorny': { categoryIds: [4], tag: 'coffee' },
+  'fritezy': { categoryIds: [4], tag: 'fryer' },
+  'mixery': { categoryIds: [4], tag: 'mixer' },
+  'kuchyn': { categoryIds: [4], tag: null },
+  'pracky': { categoryIds: [2], tag: 'washer' },
+  'ohrivac': { categoryIds: [2], tag: 'heater' },
+  'ventilator': { categoryIds: [2], tag: 'fan' },
+  'susicka': { categoryIds: [2], tag: 'dryer' },
+  'sprchovka': { categoryIds: [2], tag: 'shower' },
+  'toaleta': { categoryIds: [2], tag: 'toilet' },
+  'odsavac': { categoryIds: [2], tag: 'extractor' },
+  'zrcadlo': { categoryIds: [2], tag: 'mirror' },
+  'koupelna': { categoryIds: [2], tag: null }
+};
+
+// Naviguj na novou stránku
+function navigateTo(pageId) {
+  try {
+    // Skryj všechny stránky
+    document.querySelectorAll('.page').forEach(page => {
+      page.style.display = 'none';
+      page.classList.remove('active');
+    });
+    
+    // Zobraz vybranou stránku
+    const page = document.getElementById(pageId);
+    if (page) {
+      page.style.display = 'block';
+      page.classList.add('active');
+      currentPage = pageId;
+      
+      // Načti produkty pro tuto stránku
+      if (pageId !== 'home' && pageId !== 'kategorie' && pageId !== 'o-projektu') {
+        loadProductsForPage(pageId);
+      }
+      
+      // Očisti search input
+      const searchInput = document.getElementById('searchInput');
+      if (searchInput) {
+        searchInput.value = '';
+      }
+    } else {
+      console.error('Stránka nenalezena:', pageId);
+    }
+    
+    // Zkroluj na začátek
+    window.scrollTo(0, 0);
+  } catch (error) {
+    console.error('Chyba v navigateTo:', error);
+  }
+}
+
+// Filtruj produkty podle stránky a zobraz je
+function loadProductsForPage(pageId) {
+  const benchmarkId = 'benchmark-' + pageId;
+  const benchmarkSection = document.getElementById(benchmarkId);
+  
+  if (!benchmarkSection) {
+    console.warn('Benchmark section nenalezen:', benchmarkId);
+    return;
+  }
+  
+  const config = pageConfigMap[pageId];
+  if (!config) {
+    benchmarkSection.innerHTML = '<p>Žádné produkty nenalezeny.</p>';
+    return;
+  }
+  
+  const { categoryIds, tag } = config;
+  
+  if (!products || products.length === 0) {
+    benchmarkSection.innerHTML = '<h2>Benchmark – Porovnání Produktů</h2><p>Načítám produkty...</p>';
+    console.log('Produkty ještě nejsou načteny, znovu se pokouším...');
+    // Znovu se pokus načíst produkty
+    loadProducts().then(() => {
+      loadProductsForPage(pageId);
+    });
+    return;
+  }
+  
+  let filtered = products.filter(product => {
+    if (product.category_id === null || product.category_id === undefined) return false;
+    return categoryIds.includes(Number(product.category_id));
+  });
+  
+  // Filtruj podle tagu, pokud existuje
+  if (tag) {
+    filtered = filtered.filter(product => {
+      if (!product.tag) return false;
+      const tagLower = tag.toLowerCase();
+      const productTag = product.tag.toLowerCase();
+      // Povolit i množné číslo (např. CPUs, Microwaves)
+      return (
+        productTag === tagLower ||
+        productTag === tagLower + 's' ||
+        productTag === tagLower + 'es' ||
+        productTag.includes(tagLower) ||
+        productTag.includes(tagLower + 's') ||
+        productTag.includes(tagLower + 'es')
+      );
+    });
+  }
+  
+  displayBenchmarkForPage(benchmarkSection, filtered);
+}
+
+// Zobraz produkty v benchmark sekci
+function displayBenchmarkForPage(section, data) {
+  section.innerHTML = '<h2>Benchmark – Porovnání Produktů</h2><div class="products-container"></div>';
+  const container = section.querySelector('.products-container');
+  
+  if (!data || data.length === 0) {
+    section.innerHTML += '<p>Žádné produkty nenalezeny.</p>';
+    return;
+  }
+  
+  data.forEach(product => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    
+    // Příprava fotky - Hledá fotku podle ID produktu (image-{id}.jpg)
+    let imageHTML = '';
+    const productId = product.id || product.product_id;
+    let imageUrl = null;
+    
+    // Zkusí hledat fotku s názvem: image-{id}.jpg
+    if (productId) {
+      imageUrl = `images/image-${productId}.jpg`;
+    }
+    
+    if (imageUrl) {
+      imageHTML = `<div class="card-image-small"><img src="${imageUrl}" alt="${product.name}" onerror="this.parentElement.style.background='linear-gradient(135deg, #667eea 0%, #764ba2 100%)'"></div>`;
+    } else {
+      // Prázdná gradient plocha
+      imageHTML = `<div class="card-image-small"></div>`;
+    }
+    
+    let specsHTML = '';
+    if (product.specifications && typeof product.specifications === 'object') {
+      specsHTML = '<div class="card-specs"><table>';
+      for (const [key, value] of Object.entries(product.specifications)) {
+        specsHTML += `<tr><th>${key}</th><td>${value}</td></tr>`;
+      }
+      specsHTML += '</table></div>';
+    }
+    
+    const categoryName = product.category_name || 'Ostatní';
+    
+
+    card.innerHTML = `
+      <div class="card-header">
+        ${imageHTML}
+        <h3>${product.name}</h3>
+      </div>
+      <div class="card-body">
+        <p class="category-badge">${categoryName}</p>
+        ${specsHTML}
+        <button class="compare-btn" data-product-name="${encodeURIComponent(product.name)}">Porovnat</button>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+
+  // Přidat event listenery na tlačítka Porovnat
+  section.querySelectorAll('.compare-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const name = decodeURIComponent(this.getAttribute('data-product-name'));
+      const isActive = this.classList.contains('active');
+      if (isActive) {
+        removeFromCompare(name);
+        this.classList.remove('active');
+        this.textContent = 'Porovnat';
+      } else {
+        addToCompare(name);
+        this.classList.add('active');
+        this.textContent = 'Odebrat z porovnání';
+      }
+    });
+  });
+
+// Odebrat produkt z porovnání
+function removeFromCompare(name) {
+  const list = document.getElementById('compare-list');
+  if (!list) return;
+  const ul = list.querySelector('.compare-ul');
+  if (!ul) return;
+  [...ul.children].forEach(li => {
+    if (li.textContent === name) li.remove();
+  });
+  // Pokud je seznam prázdný, odstraníme celý blok
+  if (ul.children.length === 0) list.remove();
+}
+}
+
+// Přidat produkt do seznamu porovnání v menu
+function addToCompare(name) {
+  let list = document.getElementById('compare-list');
+  if (!list) {
+    // Pokud seznam neexistuje, vytvoř ho v menu
+    const sidebar = document.querySelector('header');
+    list = document.createElement('div');
+    list.id = 'compare-list';
+    list.innerHTML = '<div class="compare-title">Porovnání:</div><ul class="compare-ul"></ul>';
+    sidebar.appendChild(list);
+  }
+  const ul = list.querySelector('.compare-ul');
+  // Zamezit duplicitám
+  if ([...ul.children].some(li => li.textContent === name)) return;
+  const li = document.createElement('li');
+  li.textContent = name;
+  ul.appendChild(li);
+  // Pokud jsou vybrány dva produkty, otevři compare.html s parametry
+  if (ul.children.length === 2) {
+    const selected = [...ul.children].map(li => encodeURIComponent(li.textContent));
+    const url = `compare.html?product1=${selected[0]}&product2=${selected[1]}`;
+    window.open(url, '_blank');
+  }
+}
+
+
+// Rozbal/sbal kategorie
 function toggleCategory(element) {
+  try {
     const subcategories = element.nextElementSibling;
     const toggle = element.querySelector('.toggle');
     
-    subcategories.classList.toggle('open');
-    toggle.textContent = subcategories.classList.contains('open') ? '▲' : '▼';
-}
-</script>
-
-<script>
-const products = [
-    { name: 'Samsung MW3500', link: 'mikrovlnky.html', category: 'Mikrovlnky' },
-    { name: 'LG F4WV3496AD', link: 'pracky.html', category: 'Pračky' }
-];
-
-document.getElementById('searchInput').addEventListener('input', function() {
-    const query = this.value.toLowerCase();
-    const resultsDiv = document.getElementById('searchResults');
-    if (query === '') {
-        resultsDiv.innerHTML = '';
-        return;
+    if (subcategories && toggle) {
+      subcategories.classList.toggle('open');
+      toggle.textContent = subcategories.classList.contains('open') ? '▲' : '▼';
     }
-    const filtered = products.filter(p => p.name.toLowerCase().includes(query));
-    resultsDiv.innerHTML = filtered.map(p => `<div><a href="${p.link}">${p.name} - ${p.category}</a></div>`).join('');
+  } catch (error) {
+    console.error('Chyba v toggleCategory:', error);
+  }
+}
+
+// Načti kategorie z API
+async function loadCategories() {
+  try {
+    console.log('Načítám kategorie z API:', CATEGORIES_API_URL);
+    const response = await fetch(CATEGORIES_API_URL);
+    
+    if (!response.ok) {
+      throw new Error(`Chyba API: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    categories = data.categories || data;
+    console.log('Kategorie načteny:', categories);
+  } catch (error) {
+    console.error('Chyba při načítání kategorií:', error);
+  }
+}
+
+// Načti a zobraz produkty ze serveru
+async function loadProducts() {
+  try {
+    console.log('Načítám data z API:', API_URL);
+    const response = await fetch(API_URL);
+    
+    if (!response.ok) {
+      throw new Error(`Chyba API: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    products = data.products || data;
+    console.log('Data načtena:', products);
+    console.log('Počet produktů:', products.length);
+  } catch (error) {
+    console.error('Chyba při načítání dat:', error);
+    console.log('Pokud je API nedostupná, aplikace přesto funguje. Otevřete konzoli (F12) pro více detailů.');
+  }
+}
+
+// Filtruj a zobraz produkty podle vyhledávacího dotazu - HLEDÁ VE VŠECH PRODUKTECH
+function filterAndDisplay(query) {
+  const benchmarkId = 'benchmark-' + currentPage;
+  const benchmarkSection = document.getElementById(benchmarkId);
+  
+  if (!benchmarkSection) return;
+  
+  // Pokud je prázdný dotaz, zobraz produkty aktuální stránky
+  if (!query.trim()) {
+    if (currentPage !== 'home' && currentPage !== 'kategorie' && currentPage !== 'o-projektu') {
+      loadProductsForPage(currentPage);
+    }
+    return;
+  }
+  
+  // Hledej ve VŠECH produktech bez ohledu na aktuální stránku
+  const filtered = products.filter(p => 
+    (p.name && p.name.toLowerCase().includes(query.toLowerCase())) ||
+    (p.category_name && p.category_name.toLowerCase().includes(query.toLowerCase())) ||
+    (p.tag && p.tag.toLowerCase().includes(query.toLowerCase()))
+  );
+  
+  displayBenchmarkForPage(benchmarkSection, filtered);
+}
+
+// Inicializace
+document.addEventListener('DOMContentLoaded', async () => {
+  console.log('Inicializuji SPA aplikaci...');
+  await loadCategories();
+  await loadProducts();
+  
+  const searchInput = document.getElementById('searchInput');
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      filterAndDisplay(e.target.value);
+    });
+  }
+  
+  // Načti domovskou stránku
+  navigateTo('home');
+
+  // === DOPORUČENÉ PRODUKTY ===
+  function renderRecommended(products) {
+    const container = document.getElementById('recommended-products');
+    if (!container) return;
+    container.innerHTML = '';
+    // Vyber náhodně 3 různé produkty
+    const shuffled = products.slice().sort(() => 0.5 - Math.random());
+    const selected = shuffled.slice(0, 3);
+    selected.forEach(product => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      let imageUrl = '';
+      const productId = product.id || product.product_id;
+      if (productId) {
+        imageUrl = `images/image-${productId}.jpg`;
+      } else {
+        imageUrl = 'images/placeholder.png';
+      }
+      card.innerHTML = `
+        <div class="card-header">
+          <div class="card-image-small"><img src="${imageUrl}" alt="${product.name}" onerror="this.parentElement.style.background='linear-gradient(135deg, #667eea 0%, #764ba2 100%)'"></div>
+          <h3>${product.name}</h3>
+        </div>
+        <div class="card-body">
+          <p class="category-badge">${product.category_name || 'Ostatní'}</p>
+          <p>${product.description || ''}</p>
+        </div>
+      `;
+      container.appendChild(card);
+    });
+  }
+
+  // Po načtení produktů zobraz doporučené
+  if (products && products.length > 0) {
+    renderRecommended(products);
+  } else {
+    // Pokud ještě nejsou produkty, počkej na jejich načtení
+    const origLoadProducts = loadProducts;
+    window.loadProducts = async function() {
+      await origLoadProducts.apply(this, arguments);
+      renderRecommended(products);
+    };
+  }
+  console.log('SPA aplikace připravena');
 });
 </script>
 
