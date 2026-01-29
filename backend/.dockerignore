@@ -1,0 +1,7 @@
+target/
+.env
+.git/
+.gitignore
+*.md
+demo_comparison.sh
+reset_db.sh
